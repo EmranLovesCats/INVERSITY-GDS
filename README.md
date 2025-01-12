@@ -36,8 +36,8 @@ Installation:
 Files -> documents -> Bestmemes2 -> double the html document for each of the 3 pages to load them up in a browser
 
 Credits:
-Claude AI
-Figma
+Claude AI,
+Figma,
 Emran
 
 
