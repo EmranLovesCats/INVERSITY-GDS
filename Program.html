@@ -1,0 +1,464 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOV.UK2 - Official UK Government Website</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --uk-red: #C8102E;
+            --uk-blue: #012169;
+            --uk-white: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        .announcement-banner {
+            background-color: var(--uk-red);
+            color: var(--uk-white);
+            text-align: center;
+            padding: 0.5rem;
+            position: relative;
+        }
+
+        .announcement-banner .close-btn {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .header {
+            background-color: var(--uk-blue);
+            color: var(--uk-white);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .button {
+            background-color: var(--uk-white);
+            color: var(--uk-blue);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: var(--uk-red);
+            color: var(--uk-white);
+            transform: translateY(-2px);
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            background-color: var(--uk-blue);
+            color: var(--uk-white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            background-color: var(--uk-white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: var(--uk-blue);
+            border-bottom: 2px solid var(--uk-red);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .link-card {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--uk-blue);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-left-color: var(--uk-red);
+        }
+
+        .link-card a {
+            color: var(--uk-blue);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .link-card p {
+            margin: 0.5rem 0 0 0;
+            color: #666;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding: 0.5rem;
+        }
+
+        .quick-action-btn {
+            background-color: var(--uk-white);
+            border: 2px solid var(--uk-blue);
+            color: var(--uk-blue);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            background-color: var(--uk-blue);
+            color: var(--uk-white);
+        }
+
+        .footer {
+            background-color: var(--uk-blue);
+            color: var(--uk-white);
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--uk-white);
+            border-bottom: 2px solid var(--uk-red);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--uk-white);
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #ddd;
+        }
+
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-selector select {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--uk-white);
+            color: var(--uk-blue);
+        }
+
+        @media (max-width: 768px) {
+            .nav-buttons {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--uk-white);
+            padding: 1rem;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .cookie-banner.show {
+            display: block;
+        }
+
+        /* Accessibility Features */
+        .high-contrast {
+            filter: invert(1);
+        }
+
+        .larger-text {
+            font-size: 120%;
+        }
+    </style>
+</head>
+<body>
+    <div class="announcement-banner">
+        Important: New COVID-19 guidelines in effect
+        <span class="close-btn">&times;</span>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                GOV.UK2
+            </div>
+            <nav class="nav-buttons">
+                <a href="index.html" class="button">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="accessibility.html" class="button">
+                    <i class="fas fa-universal-access"></i>
+                    Accessibility
+                </a>
+                <a href="signin.html" class="button">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </a>
+                <div class="language-selector">
+                    <select>
+                        <option value="en">English</option>
+                        <option value="cy">Cymraeg</option>
+                        <option value="gd">Gàidhlig</option>
+                    </select>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search GOV.UK2...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+
+    <main class="main-content">
+        <div class="quick-actions">
+            <button class="quick-action-btn">Apply for Passport</button>
+            <button class="quick-action-btn">Pay Council Tax</button>
+            <button class="quick-action-btn">Book Driving Test</button>
+            <button class="quick-action-btn">Register to Vote</button>
+            <button class="quick-action-btn">Find Local Services</button>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i>
+                Main Services
+            </h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="#">
+                        <i class="fas fa-pound-sign"></i>
+                        Finance
+                    </a>
+                    <p>Tax, benefits, pensions and money matters</p>
+                </div>
+                <div class="link-card">
+                    <a href="#">
+                        <i class="fas fa-passport"></i>
+                        Immigration
+                    </a>
+                    <p>Visas, citizenship and settling in the UK</p>
+                </div>
+                <div class="link-card">
+                    <a href="#">
+                        <i class="fas fa-gavel"></i>
+                        Law
+                    </a>
+                    <p>Justice system, legal rights and legislation</p>
+                </div>
+                <div class="link-card">
+                    <a href="#">
+                        <i class="fas fa-id-card"></i>
+                        Licences
+                    </a>
+                    <p>Driving, business and specialized permits</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-folder"></i>
+                Miscellaneous
+            </h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="#">
+                        <i class="fas fa-building"></i>
+                        UK Government Activity
+                    </a>
+                    <p>Latest updates on government operations</p>
+                </div>
+                <div class="link-card">
+                    <a href="#">
+                        <i class="fas fa-newspaper"></i>
+                        News
+                    </a>
+                    <p>Current events and press releases</p>
+                </div>
+                <div class="link-card">
+                    <a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        Statistics
+                    </a>
+                    <p>Official data and research</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#">About GOV.UK2</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cookie-banner">
+        <p>This website uses cookies to ensure you get the best experience. 
+           <button class="button">Accept All</button>
+           <button class="button">Manage Preferences</button>
+        </p>
+    </div>
+
+    <script>
+        // Show cookie banner
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.querySelector('.cookie-banner').classList.add('show');
+            }, 1000);
+        });
+
+        // Close announcement banner
+        document.querySelector('.announcement-banner .close-btn').addEventListener('click', function() {
+            document.querySelector('.announcement-banner').style.display = 'none';
+        });
+
+        // Search functionality
+        document.querySelector('.search-bar button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-bar input').value;
+            alert('Searching for: ' + searchTerm);
+        });
+    </script>
+</body>
+</html>

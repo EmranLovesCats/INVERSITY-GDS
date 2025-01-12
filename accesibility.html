@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility - GOV.UK2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --uk-red: #C8102E;
+            --uk-blue: #012169;
+            --uk-white: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--uk-white);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        body.colorblind {
+            --uk-red: #FFB300;
+            --uk-blue: #666666;
+        }
+
+        body.large-text {
+            font-size: 120%;
+        }
+
+        body.simplified {
+            line-height: 2;
+            word-spacing: 0.2em;
+        }
+
+        .header {
+            background-color: var(--uk-blue);
+            color: var(--uk-white);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--uk-red);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .button {
+            background-color: var(--uk-white);
+            color: var(--uk-blue);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: var(--uk-red);
+            color: var(--uk-white);
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .accessibility-controls {
+            background-color: #f5f5f5;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-button {
+            background-color: var(--uk-blue);
+            color: var(--uk-white);
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .control-button:hover {
+            background-color: var(--uk-red);
+        }
+
+        .control-button.active {
+            background-color: var(--uk-red);
+            outline: 2px solid var(--uk-blue);
+        }
+
+        .language-selector {
+            padding: 0.5rem;
+            border: 2px solid var(--uk-blue);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: var(--uk-blue);
+            border-bottom: 2px solid var(--uk-red);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Font size controls */
+        .font-size-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .font-size-display {
+            min-width: 3rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-universal-access"></i>
+            GOV.UK2
+        </div>
+        <nav class="nav-buttons">
+            <a href="index.html" class="button">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="signin.html" class="button">
+                <i class="fas fa-sign-in-alt"></i>
+                Sign In
+            </a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h1 style="color: var(--uk-blue);">Accessibility Settings</h1>
+        
+        <section class="accessibility-controls">
+            <div class="control-group">
+                <h3>Display Options</h3>
+                <button class="control-button" id="colorblind-toggle">
+                    <i class="fas fa-eye"></i>
+                    Colorblind Mode
+                </button>
+                <button class="control-button" id="simplified-toggle">
+                    <i class="fas fa-align-left"></i>
+                    Simplified View
+                </button>
+            </div>
+
+            <div class="control-group">
+                <h3>Text Size</h3>
+                <div class="font-size-controls">
+                    <button class="control-button" id="decrease-font">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="font-size-display">100%</span>
+                    <button class="control-button" id="increase-font">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>Language</h3>
+                <select class="language-selector" id="language-select">
+                    <option value="en">English</option>
+                    <option value="cy">Cymraeg (Welsh)</option>
+                    <option value="gd">Gàidhlig (Scots Gaelic)</option>
+                    <option value="pl">Polski (Polish)</option>
+                    <option value="ur">اردو (Urdu)</option>
+                    <option value="bn">বাংলা (Bengali)</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Current Accessibility Settings</h2>
+            <ul id="current-settings">
+                <li>Colorblind Mode: Off</li>
+                <li>Text Size: Normal</li>
+                <li>Simplified View: Off</li>
+                <li>Current Language: English</li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // Initialize settings
+        let fontSize = 100;
+        let isColorblind = false;
+        let isSimplified = false;
+
+        // Colorblind mode toggle
+        document.getElementById('colorblind-toggle').addEventListener('click', function() {
+            isColorblind = !isColorblind;
+            document.body.classList.toggle('colorblind');
+            this.classList.toggle('active');
+            updateSettings();
+        });
+
+        // Simplified view toggle
+        document.getElementById('simplified-toggle').addEventListener('click', function() {
+            isSimplified = !isSimplified;
+            document.body.classList.toggle('simplified');
+            this.classList.toggle('active');
+            updateSettings();
+        });
+
+        // Font size controls
+        document.getElementById('increase-font').addEventListener('click', function() {
+            if (fontSize < 200) {
+                fontSize += 10;
+                updateFontSize();
+            }
+        });
+
+        document.getElementById('decrease-font').addEventListener('click', function() {
+            if (fontSize > 70) {
+                fontSize -= 10;
+                updateFontSize();
+            }
+        });
+
+        function updateFontSize() {
+            document.body.style.fontSize = `${fontSize}%`;
+            document.querySelector('.font-size-display').textContent = `${fontSize}%`;
+            updateSettings();
+        }
+
+        // Language selector
+        document.getElementById('language-select').addEventListener('change', function() {
+            updateSettings();
+        });
+
+        // Update settings display
+        function updateSettings() {
+            const currentSettings = document.getElementById('current-settings');
+            const language = document.getElementById('language-select').options[
+                document.getElementById('language-select').selectedIndex
+            ].text;
+            
+            currentSettings.innerHTML = `
+                <li>Colorblind Mode: ${isColorblind ? 'On' : 'Off'}</li>
+                <li>Text Size: ${fontSize}%</li>
+                <li>Simplified View: ${isSimplified ? 'On' : 'Off'}</li>
+                <li>Current Language: ${language}</li>
+            `;
+        }
+
+        // Save settings to localStorage
+        function saveSettings() {
+            const settings = {
+                fontSize,
+                isColorblind,
+                isSimplified,
+                language: document.getElementById('language-select').value
+            };
+            localStorage.setItem('accessibility-settings', JSON.stringify(settings));
+        }
+
+        // Apply saved settings on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const saved = localStorage.getItem('accessibility-settings');
+            if (saved) {
+                const settings = JSON.parse(saved);
+                fontSize = settings.fontSize;
+                isColorblind = settings.isColorblind;
+                isSimplified = settings.isSimplified;
+                document.getElementById('language-select').value = settings.language;
+                
+                updateFontSize();
+                if (isColorblind) {
+                    document.getElementById('colorblind-toggle').click();
+                }
+                if (isSimplified) {
+                    document.getElementById('simplified-toggle').click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
