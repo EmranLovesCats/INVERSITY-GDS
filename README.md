@@ -35,6 +35,13 @@ Buttons to navigate pages do not work
 Installation:
 Files -> documents -> Bestmemes2 -> double the html document for each of the 3 pages to load them up in a browser
 
+Usage:
+navigate to the accesibility page -> adjust the website with the provided buttons -> until it is to you prefrence. 
+
+
+
+
+
 Credits:
 Claude AI,
 Figma,
